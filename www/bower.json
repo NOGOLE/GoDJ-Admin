@@ -1,0 +1,31 @@
+{
+  "name": "GoDJ Admin",
+  "version": "1",
+  "authors": [
+    "Jyrone Parker <jyrone.parker@gmail.com>"
+  ],
+  "description": "DJ mobile version of GoDJ. Let DJs see their requests in real-time!",
+  "main": "index.html",
+  "keywords": [
+    "GoDJ",
+    "NOGOLE",
+    "DJ",
+    "Party"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.godj.nogole.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.15",
+    "angular-route": "~1.3.15",
+    "angular-resource": "~1.3.15",
+    "bootstrap": "~3.3.4",
+    "larapush": "git@github.com:mastashake08/Larapush.js.git"
+  }
+}
