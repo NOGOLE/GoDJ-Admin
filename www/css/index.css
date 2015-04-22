@@ -1,15 +1,10 @@
 
-#dj-request {
-text-align:center;
-font-size:medium;
-}
-
 body {
 
 	color: #FFFFFF;
 	font: normal 10pt "Trebuchet MS",Helvetica,sans-serif;
 
-       background-image:url(../img/background.jpg) ;
+       background-image:url(../img/background.jpg);
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -21,15 +16,7 @@ body {
     color:white;
     margin: 16px 0 0 0;
   }
-		.request {
-      width: 300px;
-	margin: 0 auto;
-    }
 
-		.request_form_field {
-		color: #665;
-
-		}
 
 
                 h1 {
@@ -39,7 +26,7 @@ body {
                 }
 
 
-	.container {
+	.container-fluid {
 
 	font-size: 1.0em;
 	text-align: center;

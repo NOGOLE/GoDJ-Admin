@@ -1,0 +1,40 @@
+
+
+<span id="dummy"></span>
+
+  <h1>Real-Time Requests</h1>
+<div>
+  <h2>Song Requests</h2>
+<table class="table table-striped">>
+    <tr>
+        <th>Requestor Name</th>
+        <th>Song Title</th>
+        <th>Song Artist</th>
+        <th>Action</th>
+    </tr>
+    <tr ng-repeat="request in songRequests">
+        <td>{{request.requestor_name}}</td>
+        <td>{{request.title}}</td>
+        <td>{{request.artist}}</td>
+        <td><button class = "btn btn-danger btn-sm" type="button" ng-click="deleteSong($index)">Delete</button></td>
+    </tr>
+</table>
+</div>
+
+<div>
+  <h2>Mood Requests</h2>
+<table class="table table-striped">>
+    <tr>
+        <th>Requestor Name</th>
+        <th>Mood Title</th>
+        <th>Action</th>
+
+    </tr>
+    <tr ng-repeat="request in moodRequests">
+        <td>{{request.requestor_name}}</td>
+        <td>{{request.title}}</td>
+        <td><button class = "btn btn-danger btn-sm" type="button" ng-click="deleteMood($index)">Delete</button></td>
+    </tr>
+</table>
+</div>
+<button class="btn btn-sm btn-default" type="button" ng-click="logout()">Logout</button>
