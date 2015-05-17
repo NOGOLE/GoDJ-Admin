@@ -24,19 +24,19 @@ var app = angular.module('godj.services', [])
 };
 
 this.checkLogin = function() {
-  if(localStorage.username == '' && localStorage.id == '')
+  if(localStorage.username == null && localStorage.id == null)
   {
-    return false;
+        location.href = '#/';
+
   }
   else
   {
     location.href = '#/real-time';
-    return true;
     }
 };
 this.logout = function() {
-  localStorage["username"] = '';
-  localStorage["id"] = '';
+  localStorage["username"] = null;
+  localStorage["id"] = null;
   location.href = "#/";
 };
 
