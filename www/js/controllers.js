@@ -18,115 +18,167 @@ var app = angular.module('godj.controllers',[])
   //check to see if the user is already logged in
 LoginService.checkLogin();
 })
-.controller('RealTimeController', function($scope,LoginService) {
+.controller('RealTimeController', function(Mood,Song,Shoutout,LoginService) {
+  $scope.requests = [['Lat','Long','Name'],[0,0,'Test']];
+  $scope.url = 'ws://godj.nogole.com:8080';
   $scope.songRequests = [];
   $scope.moodRequests = [];
-  //hook up Larapush.js code
-  $scope.init = function() {
-//polar chart---------------------------------------
-var data = [
-    {
-        value: 0,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Song Requests"
-    },
-    {
-        value: 0,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Mood Requests"
-    }
-];
-var polar = document.getElementById("polarchart").getContext("2d");
-var myPolarChart = new Chart(polar).PolarArea(data);
-//chart-----------------------------------------------
+  var ping = new Audio('sounds/pinger2.mp3');
+  //delete songs
+  $scope.deleteSong = function($index) {
+  Song.destroy($scope.songRequests[$index].id);
+  $scope.songRequests.splice($index,1);
+  $scope.myRadarChart.datasets[0].points[0].value -= 1;
 
+       $scope.myRadarChart.update();
 
+  $scope.myPolarChart.segments[0].value -= 1;
+  // Would update the first dataset's value of 'Green' to be 10
+  $scope.myPolarChart.update();
+  };
+  //delete moods
+  $scope.deleteMood = function($index) {
+  Mood.destroy($scope.moodRequests[$index].id);
+  $scope.moodRequests.splice($index,1);
+  $scope.myPolarChart.segments[1].value -= 1;
+  // Would update the first dataset's value of 'Green' to be 10
+  $scope.myPolarChart.update();
 
+  $scope.myRadarChart.datasets[0].points[1].value -= 1;
 
-var data = {
-    labels: ["Song Requests", "Mood Requests"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(0,0,0,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [0,0]
-        },
-    ]
-};
-    var ctx = document.getElementById("radarchart").getContext("2d");
-
-    var myRadarChart = new Chart(ctx).Radar(data);
-
-
-console.log(myRadarChart);
-//end chart------------------------------------------
-
-
-      var larapush = new Larapush('ws://godj.nogole.com:8080');
-
-      larapush.watch(localStorage["username"]).on('song.request', function(msgEvent)
-      {
-        var object =JSON.parse(msgEvent.message);
-          $scope.$apply(function(){
-            $scope.addSong(object);
-          });
-          //Update Charts
-	      myRadarChart.datasets[0].points[0].value += 1;
-        myRadarChart.update();
-	      myPolarChart.segments[0].value += 1;
-        myPolarChart.update();
-
-
-   });
-
-      larapush.watch(localStorage["username"]).on('mood.request', function(msgEvent)
-      {//
-  	     var object =JSON.parse(msgEvent.message);
-          $scope.$apply(function(){
-            $scope.addMood(object);
-          });
-          //Update Charts
-	     myPolarChart.segments[1].value += 1;
-       myPolarChart.update();
-	     myRadarChart.datasets[0].points[1].value += 1;
-       myRadarChart.update();
-
-   });
-  }
-  $scope.addSong = function(object){
-          $scope.songRequests.push(object);
+  $scope.myRadarChart.update();
 
 
   };
 
-  $scope.addMood = function(object) {
+  $scope.submitParty = function(id) {
+  var stime = $scope.party_start_time;
+  var etime = $scope.party_end_time;
 
-      $scope.moodRequests.push(object);
+  console.log(stime);
+  console.log(etime);
+  var partyObject = {id:id, name: $scope.party_name, address:$scope.party_address,
+  city:$scope.party_city,state:$scope.party_state,zip:$scope.party_zip,start_time:$scope.party_start_time,end_time:$scope.party_end_time};
+  $.post('http://www.godj.nogole.com/api/v1/parties',partyObject,function(data){
+  console.log(data);
+  });
+  };
+  //initialize function
+  $scope.init = function(channel){
+    $scope.polarData;
+    $scope.radarData;
+
+
+     $http.get('http://www.godj.nogole.com/api/v1/songs').success(function(data){
+       $scope.songRequests = data;
+       $http.get('http://www.godj.nogole.com/api/v1/moods').success(function(data){
+         $scope.moodRequests = data;
+
+
+
+
+         console.log($scope.totalRequests);
+         $scope.polarData = [
+             {
+                 value: $scope.songRequests.length,
+                 color:"#F7464A",
+                 highlight: "#FF5A5E",
+                 label: "Song Requests"
+             },
+             {
+                 value: $scope.moodRequests.length,
+                 color: "#46BFBD",
+                 highlight: "#5AD3D1",
+                 label: "Mood Requests"
+             }
+         ];
+
+         $scope.radarData = {
+            labels: ["Song Requests", "Mood Requests"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(0,0,0,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [$scope.songRequests.length,$scope.moodRequests.length]
+                },
+            ]
+        };
+
+
+
+        var polar = document.getElementById("polarchart").getContext("2d");
+        $scope.myPolarChart = new Chart(polar).PolarArea($scope.polarData);
+        //chart-----------------------------------------------
+
+
+
+
+
+            var ctx = document.getElementById("radarchart").getContext("2d");
+
+           $scope.myRadarChart = new Chart(ctx).Radar($scope.radarData);
+
+
+
+        //console.log(myRadarChart);
+        //end chart------------------------------------------
+            var larapush = new Larapush($scope.url);
+            //TODO make dynamic
+            larapush.watch(channel).on('song.request', function(msgEvent)
+            {
+              ping.play();
+              var myData = JSON.parse(msgEvent.message);
+              console.log(myData);
+              $scope.$apply(function(){
+              $scope.songRequests.push(myData);
+              $scope.totalRequests = $scope.songRequests.length + $scope.moodRequests.length;
+              });
+
+
+          $scope.myRadarChart.datasets[0].points[0].value += 1;
+
+                $scope.myRadarChart.update();
+
+          $scope.myPolarChart.segments[0].value += 1;
+        // Would update the first dataset's value of 'Green' to be 10
+          $scope.myPolarChart.update();
+            });
+            larapush.watch(channel).on('mood.request', function(msgEvent)
+            {
+              ping.play();
+          var myData = JSON.parse(msgEvent.message);
+              console.log(msgEvent.message);
+              $scope.$apply(function(){
+              $scope.moodRequests.push(myData);
+              $scope.totalRequests = $scope.songRequests.length + $scope.moodRequests.length;
+          $scope.myPolarChart.segments[1].value += 1;
+        // Would update the first dataset's value of 'Green' to be 10
+        $scope.myPolarChart.update();
+
+        $scope.myRadarChart.datasets[0].points[1].value += 1;
+
+        $scope.myRadarChart.update();
+
+              });
+        //console.log(channel);
+            });
+
+       });
+
+
+     });
+
+
+
 
   };
 
-  $scope.deleteSong = function(index){
-
-      $scope.songRequests.splice(index, 1);
-
-
-  };
-
-  $scope.deleteMood = function(index){
-
-      $scope.moodRequests.splice(index, 1);
-
-  };
-  $scope.logout = function() {
-    LoginService.logout();
-  }
-
+  $scope.totalRequests = $scope.songRequests.length + $scope.moodRequests.length;
   $scope.init();
+
 });
