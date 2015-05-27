@@ -54,9 +54,6 @@
         },
         "com.rjfun.cordova.plugin.admob": {
             "PACKAGE_NAME": "com.nogole.godjadmin"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.nogole.godjadmin"
         }
     },
     "dependent_plugins": {
