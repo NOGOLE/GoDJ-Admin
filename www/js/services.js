@@ -68,17 +68,19 @@ return data;
 }
 
 })
-.service('LoginService', function($http,$location){
+.service('LoginService', function($http){
   this.login = function(email, password) {
+		alert(email+password);
     $.post('http://www.godj.nogole.com/api/v1/apilogin', {email:email,password:password},function(data, status, headers, config) {
     // this callback will be called asynchronously
     // when the response is available
+		alert(data);
     if(data.error == false) {
 
       localStorage.setItem('username',data.username);
       localStorage.setItem('id',data.id)  ;
       //alert(localStorage);
-      $location.path('/real-time');
+      location.href='#/real-time';
       return true;
     }
     else{

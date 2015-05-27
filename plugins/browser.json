@@ -6,11 +6,6 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {
-        "com.cmackay.plugins.googleanalytics": {
-            "PACKAGE_NAME": "com.nogole.godjadmin"
-        }
-    },
     "dependent_plugins": {
         "com.google.playservices": {
             "PACKAGE_NAME": "com.nogole.godjadmin"
