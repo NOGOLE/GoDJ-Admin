@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = angular.module('godj', ['ngRoute','godj.services','godj.controllers']);
+var app = angular.module('godj', ['ngRoute','godj.services','godj.controllers','ngCordova']);
 app.config(['$routeProvider',
   function($routeProvider,$locationProvider) {
     $routeProvider.

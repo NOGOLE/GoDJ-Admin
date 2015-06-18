@@ -4,47 +4,8 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {
-            "AndroidManifest.xml": {
-                "parents": {
-                    "/manifest/application": [
-                        {
-                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
-                            "count": 2
-                        }
-                    ],
-                    "/*": [
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "res/xml/config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"GoogleAnalytics\"><param name=\"android-package\" value=\"com.cmackay.plugins.googleanalytics.GoogleAnalyticsPlugin\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
-            }
-        }
+        "files": {}
     },
-    "installed_plugins": {
-        "com.cmackay.plugins.googleanalytics": {
-            "PACKAGE_NAME": "com.nogole.godjadmin"
-        }
-    },
-    "dependent_plugins": {
-        "com.google.playservices": {
-            "PACKAGE_NAME": "com.nogole.godjadmin"
-        }
-    }
+    "installed_plugins": {},
+    "dependent_plugins": {}
 }

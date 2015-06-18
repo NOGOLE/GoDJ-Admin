@@ -13,7 +13,7 @@ body {
 
   h3 {
     align: center;
-    color:white;
+    color:black;
     margin: 16px 0 0 0;
   }
 
@@ -37,3 +37,7 @@ body {
 	.table {
 	color:#000;
 	}
+.jumbotron {
+	background-color: white;
+	color:black;
+}

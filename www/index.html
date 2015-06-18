@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html ng-app="godj">
+<html>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -26,75 +26,8 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <script>
-        function onDocLoad() {
-            if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
-                document.addEventListener('deviceready', initApp, false);
-            } else {
-                initApp();
-            }
-        }
+        <script src="bower_components/ngCordova/dist/ng-cordova.min.js">
 
-        function initApp() {
-            initAd();
-            // display the banner at startup
-            window.plugins.AdMob.createBannerView();
-        }
-        function initAd(){
-            if ( window.plugins && window.plugins.AdMob ) {
-              var ad_units = {
-            ios : {
-              banner: 'ca-app-pub-2325083537234547/1019118118',
-              interstitial: 'ca-app-pub-2325083537234547/2495851316'
-            },
-            android : {
-              banner: 'ca-app-pub-2325083537234547/1158718912',
-              interstitial: 'ca-app-pub-2325083537234547/2635452113'
-            },
-            wp8 : {
-              banner: 'ca-app-pub-6869992474017983/8878394753',
-              interstitial: 'ca-app-pub-6869992474017983/1355127956'
-            }
-              };
-              var admobid = "";
-              if( /(android)/i.test(navigator.userAgent) ) {
-                admobid = ad_units.android;
-              } else if(/(iphone|ipad)/i.test(navigator.userAgent)) {
-                admobid = ad_units.ios;
-              } else {
-                admobid = ad_units.wp8;
-              }
-                window.plugins.AdMob.setOptions( {
-                    publisherId: admobid.banner,
-                    interstitialAdId: admobid.interstitial,
-                    bannerAtTop: false, // set to true, to put banner at top
-                    overlap: false, // set to true, to allow banner overlap webview
-                    offsetTopBar: false, // set to true to avoid ios7 status bar overlap
-                    isTesting: false, // receiving test ad
-                    autoShow: true // auto show interstitial ad when loaded
-                });
-                registerAdEvents();
-
-            } else {
-                alert( 'admob plugin not ready' );
-            }
-        }
-      // optional, in case respond to events
-        function registerAdEvents() {
-          document.addEventListener('onReceiveAd', function(){});
-            document.addEventListener('onFailedToReceiveAd', function(data){});
-            document.addEventListener('onPresentAd', function(){});
-            document.addEventListener('onDismissAd', function(){ });
-            document.addEventListener('onLeaveToAd', function(){ });
-            document.addEventListener('onReceiveInterstitialAd', function(){ });
-            document.addEventListener('onPresentInterstitialAd', function(){ });
-            document.addEventListener('onDismissInterstitialAd', function(){ });
-        }
-        function onResize() {
-            var msg = 'web view: ' + window.innerWidth + ' x ' + window.innerHeight;
-            document.getElementById('sizeinfo').innerHTML = msg;
-        }
-        </script>
 
         <script>
         var analytics = navigator.analytics;
@@ -104,9 +37,16 @@
         </script>
         <title>GoDJ Admin</title>
     </head>
-    <body onload="onDocLoad()">
+
+    <body ng-app="godj">
+      <div class="container-fluid">
       <div ng-view class="container-fluid jumbotron"></div>
+    </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="bower_components/chart/Chart.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/chart/Chart.js"></script>
         <script type="text/javascript" src="bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
         <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>

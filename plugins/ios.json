@@ -4,7 +4,31 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "framework": {
+                "parents": {
+                    "AdSupport.framework": [],
+                    "AudioToolbox.framework": [],
+                    "AVFoundation.framework": [],
+                    "CoreGraphics.framework": [],
+                    "CoreLocation.framework": [],
+                    "CoreTelephony.framework": [],
+                    "EventKit.framework": [],
+                    "EventKitUI.framework": [],
+                    "Foundation.framework": [],
+                    "MessageUI.framework": [],
+                    "QuartzCore.framework": [],
+                    "StoreKit.framework": [],
+                    "SystemConfiguration.framework": [],
+                    "UIKit.framework": []
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": []
+                }
+            }
+        }
     },
     "installed_plugins": {},
     "dependent_plugins": {}

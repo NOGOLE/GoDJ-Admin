@@ -1,10 +1,12 @@
 
 
-<span id="dummy"></span>
 
   <h1>Real-Time Requests</h1>
 <div>
   <h2>Song Requests</h2>
+
+<canvas id="radarchart" width="200" height="200"></canvas>
+<canvas id="polarchart" width="200" height="200"></canvas>
 <table class="table table-striped">>
     <tr>
         <th>Requestor Name</th>
@@ -23,7 +25,7 @@
 
 <div>
   <h2>Mood Requests</h2>
-<table class="table table-striped">>
+<table class="table table-striped">
     <tr>
         <th>Requestor Name</th>
         <th>Mood Title</th>
@@ -37,4 +39,4 @@
     </tr>
 </table>
 </div>
-<button class="btn btn-sm btn-default" type="button" ng-click="logout()">Logout</button>
+<button class="btn btn-sm btn-warning" type="button" ng-click="logout()">Logout</button>
