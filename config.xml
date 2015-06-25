@@ -8,6 +8,8 @@
         NOGOLE
     </author>
     <content src="index.html" />
-    <access origin="*" />
     <icon src="res/mipmap-hdpi/ic_launcher.png"  />
+    <!-- Don't block any requests -->
+<access origin="*" />
+
 </widget>

@@ -6,5 +6,30 @@
         },
         "is_top_level": false,
         "variables": {}
+    },
+    "com.jamiestarke.webviewdebug": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jrstarke/webview-debug.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-vibration": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-vibration"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

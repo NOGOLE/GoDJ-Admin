@@ -1,5 +1,5 @@
 var app = angular.module('godj.controllers',[])
-.controller('LoginController',function($scope, AuthService){
+.controller('LoginController',function($scope, AuthService,$location){
 
   //Scope Variables
   $scope.email = '';
@@ -12,7 +12,7 @@ var app = angular.module('godj.controllers',[])
       localStorage.id = data.id;
       localStorage.username = data.username;
       console.log(data);
-      window.location = '#/real-time'
+      $location.path('/real-time');
     });
       //alert("success");
 
@@ -23,9 +23,11 @@ var app = angular.module('godj.controllers',[])
   };
 
   //check to see if the user is already logged in
-AuthService.checkLogin();
+if(AuthService.checkLogin()==false) {
+  $location.path('/real-time');
+}
 })
-.controller('RealTimeController', function($scope,$http,Mood,Song,Shoutout,AuthService,$cordovaVibration) {
+.controller('RealTimeController', function($scope,$http,Mood,Song,Shoutout,AuthService,$cordovaVibration,$location) {
   //$scope.requests = [['Lat','Long','Name'],[0,0,'Test']];
   $scope.url = 'ws://godj.nogole.com:8080';
   $scope.songRequests = [];
@@ -118,6 +120,7 @@ AuthService.checkLogin();
         //console.log(myRadarChart);
         //end chart------------------------------------------
             var larapush = new Larapush($scope.url);
+            console.log(larapush);
             //TODO make dynamic
             larapush.watch(channel).on('song.request', function(msgEvent)
             {
@@ -144,7 +147,7 @@ AuthService.checkLogin();
             {
               ping.play();
               // Vibrate 100ms
-              $cordovaVibration.vibrate(100);
+              $cordovaVibration.vibrate(500);
           var myData = JSON.parse(msgEvent.message);
               console.log(msgEvent.message);
               $scope.$apply(function(){
@@ -171,7 +174,7 @@ AuthService.checkLogin();
   };
 $scope.logout = function(){
   AuthService.logout();
-  window.location = '#/'
+  $location.path('/');
 }
   $scope.totalRequests = $scope.songRequests.length + $scope.moodRequests.length;
   $scope.init(localStorage.username);

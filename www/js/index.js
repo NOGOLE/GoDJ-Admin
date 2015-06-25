@@ -16,9 +16,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = angular.module('godj', ['ngRoute','godj.services','godj.controllers','ngCordova']);
+var app = angular.module('godj', ['ngRoute','godj.services','godj.controllers','ngCordova'])
+.config(function($routeProvider, $locationProvider) {
+
+       $routeProvider
+       .when('/', {
+         templateUrl: 'partials/login.html',
+         controller: 'LoginController'
+       })
+       .when('/real-time', {
+         templateUrl: 'partials/real-time.html',
+         controller: 'RealTimeController'
+       });
+
+    
+   });
+
+/*
 app.config(['$routeProvider',
   function($routeProvider,$locationProvider) {
+    $locationProvider.html5Mode(true);
     $routeProvider.
       when('/', {
         templateUrl: 'partials/login.html',
@@ -28,4 +45,6 @@ app.config(['$routeProvider',
         templateUrl: 'partials/real-time.html',
         controller: 'RealTimeController'
       });
+
   }]);
+*/

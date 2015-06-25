@@ -6,6 +6,16 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {},
+    "installed_plugins": {
+        "com.jamiestarke.webviewdebug": {
+            "PACKAGE_NAME": "com.nogole.godjadmin"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.nogole.godjadmin"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.nogole.godjadmin"
+        }
+    },
     "dependent_plugins": {}
 }

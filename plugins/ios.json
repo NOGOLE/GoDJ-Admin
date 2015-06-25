@@ -8,7 +8,12 @@
             "framework": {
                 "parents": {
                     "AdSupport.framework": [],
-                    "AudioToolbox.framework": [],
+                    "AudioToolbox.framework": [
+                        {
+                            "xml": true,
+                            "count": 1
+                        }
+                    ],
                     "AVFoundation.framework": [],
                     "CoreGraphics.framework": [],
                     "CoreLocation.framework": [],
@@ -25,11 +30,26 @@
             },
             "config.xml": {
                 "parents": {
-                    "/*": []
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Vibration\"><param name=\"ios-package\" value=\"CDVVibration\" /></feature>",
+                            "count": 1
+                        }
+                    ]
                 }
             }
         }
     },
-    "installed_plugins": {},
+    "installed_plugins": {
+        "com.jamiestarke.webviewdebug": {
+            "PACKAGE_NAME": "com.nogole.godjadmin"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.nogole.godjadmin"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.nogole.godjadmin"
+        }
+    },
     "dependent_plugins": {}
 }
